@@ -3,12 +3,26 @@ export default (state = [], action) => {
   switch(action.type) {
     case "ADD_QUOTE":
       return [...state, action.quote ];
+
     case "REMOVE_QUOTE":
-      console.log('The original quote Id equals',action.quoteId)
-      idx = state.map((quote) {quote.id === action.quoteId
-      })
-      console.log('The id is',idx)
+      idx = state.findIndex((quote) => quote.id === action.quoteId)
       return [...state.slice(0,idx), ...state.slice(idx + 1)]
+
+    case "UPVOTE_QUOTE":
+    idx = state.findIndex((quote) => quote.id === action.quoteId)
+    let quote = state[idx]
+    return [...state.slice(0,idx), {...quote, votes: quote.votes + 1},...state.slice(idx + 1)]
+
+    case "DOWNVOTE_QUOTE":
+    idx = state.findIndex((quote) => quote.id === action.quoteId)
+    let q = state[idx]
+    if (q.votes < 1) {
+      return state
+    } else {
+      return [...state.slice(0,idx), {...q, votes: q.votes - 1},...state.slice(idx + 1)]
+    }
+
+
     default:
       return state;
   }
