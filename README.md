@@ -42,7 +42,7 @@ to build these.
 
 Build out several actions as specified in the tests that build Action Creators
 for add, removing, upvoting and downvoting quotes.
-    
+
 ### QuoteForm Component
 
 Our Quote form will have a textarea for a quotes content and an input for a
